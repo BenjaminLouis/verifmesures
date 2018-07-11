@@ -1,12 +1,22 @@
 Package: verifmesures
-Title: What the Package Does (one line, title case)
+Title: Assessment of different kinds of measurement methods
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Benjamin", "Louis", email = "benjaminlouis.pro@gmail.com", role = c("aut", "cre"))
+Description: Comparison between sets of values, comparison of methods predictive performance and comparison of reproducibility.
 Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    stats,
+    dplyr,
+    tibble,
+    purrr,
+    stringr,
+    broom,
+    tidyr,
+    ggplot2,
+    rlang,
+    graphics,
+    magrittr
 RoxygenNote: 6.0.1
-URL: https://github.com/BenjaminLouis/verifmesures
-BugReports: https://github.com/BenjaminLouis/verifmesures/issues
