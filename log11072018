@@ -1,1 +1,75 @@
 
+==> devtools::check()
+
+Updating verifmesures documentation
+Loading verifmesures
+<U+25CF> Refer to functions with `stats::fun()`
+<U+25CF> Refer to functions with `dplyr::fun()`
+<U+25CF> Refer to functions with `tibble::fun()`
+<U+25CF> Refer to functions with `purrr::fun()`
+<U+25CF> Refer to functions with `stringr::fun()`
+<U+25CF> Refer to functions with `broom::fun()`
+<U+25CF> Refer to functions with `tidyr::fun()`
+<U+25CF> Refer to functions with `ggplot2::fun()`
+<U+25CF> Refer to functions with `rlang::fun()`
+<U+25CF> Refer to functions with `graphics::fun()`
+<U+25CF> Refer to functions with `magrittr::fun()`
+Setting env vars --------------------------------------------------------------
+CFLAGS  : -Wall -pedantic
+CXXFLAGS: -Wall -pedantic
+Building verifmesures ---------------------------------------------------------
+"C:/PROGRA~1/R/R-35~1.1/bin/x64/R" --no-site-file --no-environ --no-save  \
+  --no-restore --quiet CMD build "D:\MEGA\PRO - Statisticien Independant\GIT  \
+  PROJECTS\R PACKAGES\verifmesures" --no-resave-data --no-manual 
+
+* checking for file 'D:\MEGA\PRO - Statisticien Independant\GIT PROJECTS\R PACKAGES\verifmesures/DESCRIPTION' ... OK
+* preparing 'verifmesures':
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building 'verifmesures_0.0.0.9000.tar.gz'
+
+Setting env vars --------------------------------------------------------------
+_R_CHECK_CRAN_INCOMING_USE_ASPELL_: TRUE
+_R_CHECK_CRAN_INCOMING_           : FALSE
+_R_CHECK_FORCE_SUGGESTS_          : FALSE
+Checking verifmesures ---------------------------------------------------------
+"C:/PROGRA~1/R/R-35~1.1/bin/x64/R" --no-site-file --no-environ --no-save  \
+  --no-restore --quiet CMD check  \
+  "C:\Users\benlo\AppData\Local\Temp\Rtmp8quXNi/verifmesures_0.0.0.9000.tar.gz"  \
+  --as-cran --timings --no-manual 
+
+* using log directory 'D:/MEGA/PRO - Statisticien Independant/GIT PROJECTS/R PACKAGES/verifmesures.Rcheck'
+* using R version 3.5.1 (2018-07-02)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* using session charset: ISO8859-1
+* using options '--no-manual --as-cran'
+* checking for file 'verifmesures/DESCRIPTION' ... OK
+* this is package 'verifmesures' version '0.0.0.9000'
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking serialization versions ... OK
+* checking whether package 'verifmesures' can be installed ... ERROR
+Installation failed.
+See 'D:/MEGA/PRO - Statisticien Independant/GIT PROJECTS/R PACKAGES/verifmesures.Rcheck/00install.out' for details.
+* DONE
+Status: 1 ERROR
+
+See
+  'D:/MEGA/PRO - Statisticien Independant/GIT PROJECTS/R PACKAGES/verifmesures.Rcheck/00check.log'
+for details.
+
+checking whether package 'verifmesures' can be installed ... ERROR
+Installation failed.
+See 'D:/MEGA/PRO - Statisticien Independant/GIT PROJECTS/R PACKAGES/verifmesures.Rcheck/00install.out' for details.
+R CMD check results
+1 error  | 0 warnings | 0 notes
+
+R CMD check succeeded
+
