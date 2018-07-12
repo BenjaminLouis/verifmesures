@@ -23,8 +23,8 @@ library(verifmesures)
 This function enable to compare sets of values to another set of value which is considered as a reference one. The comparison is performed through linear models.
 
 ```{r}
-data(mtcars)
-compare_values(df = mtcars, hp, drat, wt, reference = disp)
+#data(mtcars)
+#compare_values(df = mtcars, hp, drat, wt, reference = disp)
 ```
 
 
@@ -33,8 +33,8 @@ compare_values(df = mtcars, hp, drat, wt, reference = disp)
 Comparison of methods of measurement through limits of agreement Bland and Altman (ref) methods. Several methods are compared to one reference method
 
 ```{r}
-data(mtcars)
-compare_values(df = mtcars, hp, drat, wt, reference = disp)
+#data(mtcars)
+#compare_values(df = mtcars, hp, drat, wt, reference = disp)
 ```
 
 
