@@ -9,7 +9,7 @@
 #' @param strip_text graphic strip text. IF NULL, names of variables in ... arg are displayed
 #' @param graph boolean. Does the graph should be plotted ?
 #'
-#' @return a list with two element
+#' @return a list with two elements
 #' \item{models}{a tibble with models estimatoin statistics}
 #' \item{graphic}{the ggplot graphic}
 #'
@@ -41,7 +41,6 @@ compare_values <- function(df, ..., reference, x_text = NULL, y_text = NULL, str
   df <- as_tibble(df)
 
   # default graphics text
-  if (is.null(x_text)) x_text = ""
   if (is.null(y_text)) y_text = quo_name(reference)
   if (is.null(strip_text)) strip_text = map(tocompare, quo_name)
 
@@ -62,22 +61,24 @@ compare_values <- function(df, ..., reference, x_text = NULL, y_text = NULL, str
   }
   # get the linear models to compare
   dfmod <- df %>%
-    gather(key = "key", value = "value", !!! tocompare) %>%
-    group_by(key) %>%
+    gather(key = "methods", value = "value", !!! tocompare) %>%
+    group_by(methods) %>%
     nest() %>%
     mutate(model = map(data, ~lm(forms, data = .x))) %>%
     mutate(summod = map(model, glance)) %>%
     unnest(summod) %>%
     mutate(coefmod = map(model, f)) %>%
-    unnest(coefmod, .drop = FALSE)
+    unnest(coefmod, .drop = FALSE) %>%
+    mutate(methods = parse_factor(methods, levels = unlist(map(tocompare, quo_name))))
 
   # build the graphics
   ggp <- df %>%
-    gather(key = "key", value = "value", !!! tocompare) %>%
+    gather(key = "methods", value = "value", !!! tocompare) %>%
+    mutate(methods = parse_factor(methods, levels = unlist(map(tocompare, quo_name)))) %>%
     ggplot(aes(x = value, y = !! reference)) +
     geom_point(color = "gray") +
     geom_smooth(method = "lm", color = "black") +
-    facet_wrap(~key, scales = "free_x", nrow = ceiling(nrow(dfmod)/3),
+    facet_wrap(~methods, scales = "free_x", nrow = ceiling(nrow(dfmod)/3),
                labeller = as_labeller(setNames(strip_text, map(tocompare, quo_name)))) +
     theme_classic() +
     theme(panel.border = element_rect(colour = "black", fill = NA),

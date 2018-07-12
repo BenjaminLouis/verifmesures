@@ -18,7 +18,8 @@ Imports:
     rlang,
     graphics,
     magrittr,
-    utils
+    utils,
+    readr
 RoxygenNote: 6.0.1
 Suggests: 
     knitr,
