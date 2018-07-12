@@ -29,7 +29,7 @@
 #' @export
 #'
 #' @examples
-#' compare_values(df = mtcars, hp, drat, wt, reference = disp)
+#' #compare_values(df = mtcars, hp, drat, wt, reference = disp)
 
 compare_values <- function(df, ..., reference, x_text = NULL, y_text = NULL, strip_text = NULL, graph = TRUE) {
 

@@ -31,5 +31,5 @@ a list with two elements
 Title
 }
 \examples{
-compare_values(df = mtcars, hp, drat, wt, reference = disp)
+#compare_values(df = mtcars, hp, drat, wt, reference = disp)
 }
