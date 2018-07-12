@@ -20,7 +20,7 @@ library(verifmesures)
 
 # compare_values
 
-This function enable to compare sets of values to another set of value which is considered as a reference one. The comparison is performed through a linear model.
+This function enable to compare sets of values to another set of value which is considered as a reference one. The comparison is performed through linear models.
 
 ```{r}
 #data <- mtcars

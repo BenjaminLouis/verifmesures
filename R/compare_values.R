@@ -14,46 +14,23 @@
 #' \item{graphic}{the ggplot graphic}
 #'
 #' @importFrom magrittr %>%
-#' @importFrom dplyr enquo
-#' @importFrom dplyr quos
-#' @importFrom dplyr quo_name
-#' @importFrom dplyr bind_cols
-#' @importFrom dplyr rename
-#' @importFrom dplyr mutate
-#' @importFrom dplyr group_by
+#' @importFrom dplyr enquo quos quo_name bind_cols rename mutate group_by
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map
-#' @importFrom stats as.formula
-#' @importFrom stats confint
-#' @importFrom stats lm
+#' @importFrom stats as.formula confint lm setNames
 #' @importFrom stringr str_c
-#' @importFrom broom tidy
-#' @importFrom broom glance
-#' @importFrom tidyr gather
-#' @importFrom tidyr unit
-#' @importFrom tidyr spread
-#' @importFrom tidyr nest
-#' @importFrom tidyr unnest
-#' @importFrom ggplot2 ggplot
-#' @importFrom ggplot2 geom_point
-#' @importFrom ggplot2 geom_smooth
-#' @importFrom ggplot2 facet_wrap
-#' @importFrom ggplot2 theme_classic
-#' @importFrom ggplot2 theme
-#' @importFrom ggplot2 geom_abline
-#' @importFrom ggplot2 labs
-#' @importFrom rlang !!
-#' @importFrom rlang !!!
-#' @importFrom rlang is_true
+#' @importFrom broom tidy glance
+#' @importFrom tidyr gather unite spread nest unnest
+#' @importFrom rlang !! !!! is_true
 #' @importFrom graphics plot
+#' @importFrom utils data
+#' @import ggplot2
 #'
 #' @export
 #'
 #' @examples
-#' data(iris)
-#' res <- compare_values(df = iris, Sepal.Length, Petal.Width, reference = Petal.Length, graph = FALSE)
-#' res$models
-#' plot(res$graphic)
+#' compare_values(df = mtcars, hp, drat, wt, reference = disp)
+
 compare_values <- function(df, ..., reference, x_text = NULL, y_text = NULL, strip_text = NULL, graph = TRUE) {
 
   # get the quosure of arguments

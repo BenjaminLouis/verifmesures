@@ -31,8 +31,5 @@ a list with two element
 Title
 }
 \examples{
-data(iris)
-res <- compare_values(df = iris, Sepal.Length, Petal.Width, reference = Petal.Length, graph = FALSE)
-res$models
-plot(res$graphic)
+compare_values(df = mtcars, hp, drat, wt, reference = disp)
 }
