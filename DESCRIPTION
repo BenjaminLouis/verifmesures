@@ -19,7 +19,11 @@ Imports:
     graphics,
     magrittr,
     utils,
-    readr
+    readr,
+    caret,
+    pROC,
+    RColorBrewer,
+    forcats
 RoxygenNote: 6.0.1
 Suggests: 
     knitr,

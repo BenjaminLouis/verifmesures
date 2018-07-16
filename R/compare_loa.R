@@ -15,10 +15,10 @@
 #' \item{graphic}{the ggplot graphic}
 #'
 #' @importFrom magrittr %>%
-#' @importFrom dplyr enquo quos quo_name mutate group_by
+#' @importFrom dplyr enquo quos quo_name mutate group_by select summarise
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map
-#' @importFrom stats qt setNames
+#' @importFrom stats qt setNames sd
 #' @importFrom tidyr gather
 #' @importFrom rlang !! !!! is_true
 #' @importFrom graphics plot
