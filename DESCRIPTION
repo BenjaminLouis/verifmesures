@@ -23,7 +23,8 @@ Imports:
     caret,
     pROC,
     RColorBrewer,
-    forcats
+    forcats,
+    irr
 RoxygenNote: 6.0.1
 Suggests: 
     knitr,

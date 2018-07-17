@@ -95,3 +95,29 @@ get_senspe <- function(roc) {
   tibble(sensi = roc$sensitivities,
          speci = roc$specificities)
 }
+
+
+#' Function to get icc results
+#'
+#' @param dd a tibble
+#' @param model character, type of model. See ?irr::icc
+#' @param type character, type of assessment. See ?irr::icc
+#' @param unit character, type of unit. See ?irr::icc
+#'
+#' @return a tibble with ICC estimate and 95% IC
+#'
+#' @importFrom irr icc
+#' @importFrom tibble tibble
+#'
+#' @export
+#'
+#' @examples
+#' #find examples
+get_icc <- function(dd, model, type, unit) {
+
+  dd <- as.matrix(dd)
+  res <- icc(dd, model = model, type = type, unit = unit)
+  tibble(ICC = res$value, lowerICC = res$lbound, upperICC = res$ubound)
+
+}
+
