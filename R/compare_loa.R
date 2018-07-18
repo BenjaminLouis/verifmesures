@@ -7,7 +7,7 @@
 #' @param x_text graphic x axis label. If NULL, nothing is displayed
 #' @param y_text graphic y axis label. If NULL, name of reference variable is displayed
 #' @param strip_text graphic strip text. IF NULL, names of variables in ... arg are displayed
-#' @param graph boolean. Does the graph should be plotted ?
+#' @param graph boolean. Should the graphic be plotted ?
 #'
 #' @return a list with three elements
 #' \item{data}{the data with call data and graphic quantities}

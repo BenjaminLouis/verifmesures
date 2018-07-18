@@ -1,6 +1,6 @@
 usethis::use_build_ignore("devtools_history.R")
 usethis::use_mit_license(name = "Benjamin Louis")
-usethis::use_vignette("how-use-verifmesures")
+usethis::use_vignette("how-using-verifmesures")
 usethis::use_package("stats")
 usethis::use_package("dplyr")
 usethis::use_package("tibble")

@@ -1,10 +1,12 @@
 Package: verifmesures
-Title: Assessment of different kinds of measurement methods
+Title: Comparison of different measurement methods
 Version: 0.0.0.9000
 Authors@R: person("Benjamin", "Louis", email = "benjaminlouis.pro@gmail.com", role = c("aut", "cre"))
 Description: Comparison between sets of values, comparison of methods predictive performance and comparison of reproducibility.
 License: MIT + file LICENSE
 Encoding: UTF-8
+URL: http://github.com/BenjaminLouis/verifmesures
+BugReports: http://github.com/BenjaminLouis/verifmesures/issues
 LazyData: true
 Imports: 
     stats,
