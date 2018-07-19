@@ -22,7 +22,7 @@ compare_loa(df, ..., reference, IC_level = 0.95, x_text = NULL,
 
 \item{strip_text}{graphic strip text. IF NULL, names of variables in ... arg are displayed}
 
-\item{graph}{boolean. Does the graph should be plotted ?}
+\item{graph}{boolean. Should the graphic be plotted ?}
 }
 \value{
 a list with three elements

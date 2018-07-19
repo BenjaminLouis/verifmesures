@@ -82,7 +82,7 @@ compare_loa <- function(df, ..., reference, IC_level = 0.95, x_text = NULL, y_te
   # plot graphic if true
   if (is_true(graph)) plot(ggp)
 
-  return(data = dfstat, loa = dfloa, graph = ggp)
+  return(list(data = dfstat, loa = dfloa, graph = ggp))
 
 }
 
