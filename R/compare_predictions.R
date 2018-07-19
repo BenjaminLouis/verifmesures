@@ -27,6 +27,7 @@
 #' @importFrom readr parse_factor
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom forcats fct_reorder
+#' @importFrom pROC auc
 #' @import ggplot2
 #'
 #' @export
@@ -48,6 +49,7 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
   }
   methods_name <- select(df, !!! tocompare) %>% colnames()
   if (is.null(text_class)) text_class = "Class"
+  my_y <- sym(names(level)[level %in% success])
 
   # Data manipulation
   df <- as_tibble(df) %>%
@@ -63,7 +65,7 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
   dfcomp <- df %>%
     group_by(methods) %>%
     nest() %>%
-    mutate(model = map(data, train_mod, xdata = as.data.frame(data[, "value"]), yvec = data$fact_response)) %>%
+    mutate(model = map(data, ~train_mod(xdata = as.data.frame(.[, "value"]), yvec = .$fact_response))) %>%
     mutate(confusion = map(model, get_confMat)) %>%
     mutate(roc = map(model, get_roc, success = names(level)[level %in% success])) %>%
     mutate(auc = map_dbl(roc, auc)) %>%
@@ -72,9 +74,10 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
 
   # graph of prediction
   ggp1 <- ggplot() +
-    geom_jitter(data = unnest(dfcomp, data), aes(x = value, y = !! response, color = fact_response), height = 0.05, width = 0) +
-    geom_line(data = unnest(dfcomp, prediction), aes_string(x = "value", y = names(level)[level %in% success])) +
-    facet_wrap(~methods, nrow = ceiling(nrow(dfcomp)/3)) +
+    geom_jitter(data = unnest(dfcomp, data), aes(x = value, y = prob_response, color = fact_response), height = 0.05, width = 0) +
+    geom_line(data = unnest(dfcomp, prediction), aes(x = value, y = !! my_y)) +
+    facet_wrap(~methods, nrow = ceiling(nrow(dfcomp)/3),
+               labeller = as_labeller(setNames(map(tocompare, quo_name), map(tocompare, quo_name)))) +
     theme_classic() +
     theme(panel.border = element_rect(colour = "black", fill = NA),
           axis.text = element_text(face = "bold", size = 11),
@@ -110,7 +113,7 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
     mutate(confMat = map(confusion, ~as_tibble(t(.$byClass)))) %>%
     select(methods, auc, confMat) %>%
     unnest(confMat) %>%
-    select(-Precision, - Recall)
+    select(-Precision, -Recall)
 
   return(list(models = dfcomp, roc = dfrocstat, graph_pred = ggp1, graph_roc = ggp2))
 

@@ -7,20 +7,20 @@
 #'
 #' @return the results of the fitted model with function caret::train
 #'
-#' @importFrom caret train trainControl twoClassSummary
+#' @import caret
 #'
 #' @export
 #'
 #' @examples
 #' #find an example
 train_mod <- function(xdata, yvec) {
-  train(x = xdata, y = yvec,  method ="glm", metric = "ROC",
+  train(x = xdata, y = yvec,  method = "glm", metric = "ROC",
         trControl = trainControl(summaryFunction = twoClassSummary,
                                  classProbs = TRUE,
                                  savePredictions = TRUE,
                                  method = "repeatedcv",
-                                 repeats = 10,
-                                 number = 5))
+                                 repeats = 20,
+                                 number = 10))
 }
 
 

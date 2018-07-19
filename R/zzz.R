@@ -5,4 +5,5 @@ utils::globalVariables(c("p.value", "statistic", "term", "key", "stat", "value",
                          "upperbias", "lowerbias", "CI_LoA_multiplier", "upperLoA", "lowerLoA",
                          "rangeLoA", "Precision", "auc", "confMat","confusion",
                          "fact_response", "prediction", "sensi", "senspe", "speci",
-                         "which_repetition", "which_observer", "ICC", "lowerICC", "upperICC"))
+                         "which_repetition", "which_observer", "ICC", "lowerICC", "upperICC",
+                         "prob_response"))
