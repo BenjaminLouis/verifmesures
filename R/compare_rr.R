@@ -5,8 +5,8 @@
 #' @param subjects unquoted name of subject column
 #' @param observers unquoted name of observers/raters column
 #' @param repetitions unquoted name of repetitions column
-#' @param which_repetitions a character string. The code of repetitions to use for reproducibility.
-#' @param which_observers a character string. The code of observers/raters to use for repeatability.
+#' @param which_repetition a character string. The code of repetitions to use for reproducibility.
+#' @param which_observer a character string. The code of observers/raters to use for repeatability.
 #' @param graph boolean. Should the graphics be plotted ?
 #'
 #' @return a list with two element
@@ -27,15 +27,15 @@
 #'
 #' @examples
 #' #find example
-compare_rr <- function(df, ..., subjects, observers, repetitions, which_repetitions, which_observers, graph = TRUE) {
+compare_rr <- function(df, ..., subjects, observers, repetitions, which_repetition, which_observer, graph = TRUE) {
 
   df <- as_tibble(df)
 
   # get the quosure of arguments
   tocompare <- quos(...)
-  subjects <- quo(subjects)
-  observers <- quo(observers)
-  repetitions <- quo(repetitions)
+  subjects <- enquo(subjects)
+  observers <- enquo(observers)
+  repetitions <- enquo(repetitions)
 
   # Reproducibility
   df_repro <- df %>%

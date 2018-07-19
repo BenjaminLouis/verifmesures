@@ -4,8 +4,8 @@
 \alias{compare_rr}
 \title{Function to compare reproducility and repeatability of different measurement methods through the calcul of Intraclass Correlation Coefficient (ICC)}
 \usage{
-compare_rr(df, ..., subjects, observers, repetitions, which_repetitions,
-  which_observers, graph = TRUE)
+compare_rr(df, ..., subjects, observers, repetitions, which_repetition,
+  which_observer, graph = TRUE)
 }
 \arguments{
 \item{df}{a tibble}
@@ -18,9 +18,9 @@ compare_rr(df, ..., subjects, observers, repetitions, which_repetitions,
 
 \item{repetitions}{unquoted name of repetitions column}
 
-\item{which_repetitions}{a character string. The code of repetitions to use for reproducibility.}
+\item{which_repetition}{a character string. The code of repetitions to use for reproducibility.}
 
-\item{which_observers}{a character string. The code of observers/raters to use for repeatability.}
+\item{which_observer}{a character string. The code of observers/raters to use for repeatability.}
 
 \item{graph}{boolean. Should the graphics be plotted ?}
 }
