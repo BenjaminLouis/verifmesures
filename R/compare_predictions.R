@@ -70,6 +70,7 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
     mutate(confusion = map(model, get_confMat)) %>%
     mutate(roc = map(model, get_roc, success = names(level)[level %in% success])) %>%
     mutate(auc = map(roc, ci)) %>%
+    mutate(AUC = map_dbl(auc, ~.[2])) %>%
     mutate(prediction = map(model, get_prediction, newdata = new_data, type = "prob")) %>%
     mutate(senspe = map(roc, get_senspe))
 
@@ -95,7 +96,7 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
     mutate(methods = parse_factor(methods, levels = methods_name)) %>%
     group_by(methods) %>%
     arrange(sensi) %>%
-    ggplot(aes(x = 1 - speci, y = sensi, color = fct_reorder(methods, auc, .desc = TRUE))) +
+    ggplot(aes(x = 1 - speci, y = sensi, color = fct_reorder(methods, AUC, .desc = TRUE))) +
     geom_line() +
     theme_classic() +
     theme(axis.text = element_text(face = "bold", size = 11),
