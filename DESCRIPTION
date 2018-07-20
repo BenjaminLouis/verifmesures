@@ -26,7 +26,8 @@ Imports:
     pROC,
     RColorBrewer,
     forcats,
-    irr
+    irr,
+    tidyselect
 RoxygenNote: 6.0.1
 Suggests: 
     knitr,

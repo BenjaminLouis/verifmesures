@@ -27,7 +27,8 @@
 #' @importFrom readr parse_factor
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom forcats fct_reorder
-#' @importFrom pROC auc
+#' @importFrom pROC ci
+#' @importFrom tidyselect everything
 #' @import ggplot2
 #'
 #' @export
@@ -68,7 +69,7 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
     mutate(model = map(data, ~train_mod(xdata = as.data.frame(.[, "value"]), yvec = .$fact_response))) %>%
     mutate(confusion = map(model, get_confMat)) %>%
     mutate(roc = map(model, get_roc, success = names(level)[level %in% success])) %>%
-    mutate(auc = map_dbl(roc, auc)) %>%
+    mutate(auc = map(roc, ci)) %>%
     mutate(prediction = map(model, get_prediction, newdata = new_data, type = "prob")) %>%
     mutate(senspe = map(roc, get_senspe))
 
@@ -112,10 +113,31 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
   dfrocstat <- dfcomp %>%
     mutate(confMat = map(confusion, ~as_tibble(t(.$byClass)))) %>%
     select(methods, auc, confMat) %>%
+    mutate(lowerAUC = map_dbl(auc, ~.[1])) %>%
+    mutate(AUC = map_dbl(auc, ~.[2])) %>%
+    mutate(upperAUC = map_dbl(auc, ~.[3])) %>%
+    select(-auc) %>%
     unnest(confMat) %>%
-    select(-Precision, -Recall)
+    select(-Precision, -Recall, -F1, -'Balanced Accuracy', -'Detection Rate') %>%
+    rename(Methods = methods, PPV = 'Pos Pred Value', NPV = 'Neg Pred Value') %>%
+    select(Methods, AUC, lowerAUC, upperAUC, everything())
 
-  return(list(models = dfcomp, roc = dfrocstat, graph_pred = ggp1, graph_roc = ggp2))
+
+  #Graph of AUC
+  ggp3 <- ggplot(dfrocstat) +
+    geom_segment(aes(x = lowerAUC, xend = upperAUC,
+                     y = fct_reorder(Methods, AUC), yend = fct_reorder(Methods, AUC))) +
+    geom_point(aes(x = AUC, y = fct_reorder(Methods, AUC)), shape = 21, size = 3, fill = "black") +
+    geom_point(aes(x = lowerAUC, y = fct_reorder(Methods, AUC)), shape = 124, size = 3) +
+    geom_point(aes(x = upperAUC, y = fct_reorder(Methods, AUC)), shape = 124, size = 3) +
+    theme_classic() +
+    theme(axis.text = element_text(face = "bold", size = 11),
+          axis.title = element_text(face = "bold", size = 13),
+          strip.text = element_text(face = "bold", size = 13)) +
+    labs(x = "AUC", y = "Methods") +
+    xlim(0.5, 1)
+
+  return(list(models = dfcomp, roc = dfrocstat, graph_pred = ggp1, graph_roc = ggp2, graph_auc = ggp3))
 
 
 }

@@ -19,6 +19,7 @@ train_mod <- function(xdata, yvec) {
                                  classProbs = TRUE,
                                  savePredictions = TRUE,
                                  method = "repeatedcv",
+                                 sampling = "up",
                                  repeats = 20,
                                  number = 10))
 }

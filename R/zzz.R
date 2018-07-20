@@ -6,4 +6,4 @@ utils::globalVariables(c("p.value", "statistic", "term", "key", "stat", "value",
                          "rangeLoA", "Precision", "auc", "confMat","confusion",
                          "fact_response", "prediction", "sensi", "senspe", "speci",
                          "which_repetition", "which_observer", "ICC", "lowerICC", "upperICC",
-                         "prob_response"))
+                         "prob_response", "AUC", "F1", "lowerAUC", "upperAUC", "Methods"))
