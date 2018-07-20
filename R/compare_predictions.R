@@ -19,7 +19,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom dplyr enquo quos quo_name mutate group_by select arrange
 #' @importFrom tibble as_tibble
-#' @importFrom purrr map map_dbl
+#' @importFrom purrr map map_dbl map_chr
 #' @importFrom stats setNames
 #' @importFrom tidyr gather nest unnest
 #' @importFrom rlang !! !!! is_true
@@ -74,10 +74,18 @@ compare_prediction <- function(df, ..., response, success, level = NULL, pal, te
     mutate(prediction = map(model, get_prediction, newdata = new_data, type = "prob")) %>%
     mutate(senspe = map(roc, get_senspe))
 
+  dat <- dfcomp %>%
+    unnest(data) %>%
+    mutate(methods = parse_factor(methods, levels = map_chr(tocompare, quo_name)))
+  pred <- dfcomp %>%
+    unnest(prediction) %>%
+    mutate(methods = parse_factor(methods, levels = map_chr(tocompare, quo_name)))
+
   # graph of prediction
   ggp1 <- ggplot() +
-    geom_jitter(data = unnest(dfcomp, data), aes(x = value, y = prob_response, color = fact_response), height = 0.05, width = 0) +
-    geom_line(data = unnest(dfcomp, prediction), aes(x = value, y = !! my_y)) +
+    geom_jitter(data = dat, aes(x = value, y = prob_response, color = fact_response), height = 0.05, width = 0) +
+    geom_line(data = pred, aes(x = value, y = !! my_y)) +
+    scale_color_manual(values = brewer.pal(3, "Set1")[1:2], name = text_class) +
     facet_wrap(~methods, nrow = ceiling(nrow(dfcomp)/3),
                labeller = as_labeller(setNames(map(tocompare, quo_name), map(tocompare, quo_name)))) +
     theme_classic() +
